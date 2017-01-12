@@ -8,7 +8,7 @@
 namespace Poisson;
 defined('Poisson') or die('Acces interdit');
 
-class SuiviController extends \F3il\Controller
+class DiffusionController extends \F3il\Controller
 {
     public function __construct($actionName = 'lister')
     {
@@ -20,7 +20,7 @@ class SuiviController extends \F3il\Controller
     {
         $page=\F3il\Page::getInstance();
         $page->setTemplate('application');
-        $page->setView('vue2');
+        $page->setView('diffusion-liste');
 
     }
 

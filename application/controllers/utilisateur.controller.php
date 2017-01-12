@@ -140,6 +140,6 @@ class UtilisateurController extends \F3il\Controller
     public function deconnecterAction(){
         $authentication=\F3il\Authentication::getInstance();
         $authentication->logout();
-        \F3il\HttpHelper::redirect('?controller=suivi');
+        \F3il\HttpHelper::redirect('?controller=utilisateur');
     }
 }

@@ -7,7 +7,7 @@
  */
 namespace Poisson;
 defined("Poisson") or die("Acess interdit form.view");
-
+$this->setPageTitle('Utilisateur-Form');
 ?>
 <head>
     <title>Form Test</title>

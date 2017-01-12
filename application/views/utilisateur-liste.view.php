@@ -8,6 +8,7 @@
 namespace Poisson;
 defined("Poisson") or die("Acess interdit utilisateur-liste");
 \F3il\Messages::setMessageRenderer('\Poisson\MessagesHelper::messagesRenderer');
+$this->setPageTitle('Utilisateur-Liste');
 ?>
 <h2>Liste des utilisateurs</h2>
 [%MESSAGES%]
