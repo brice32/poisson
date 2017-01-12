@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.4.14
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 12 Janvier 2017 à 14:53
--- Version du serveur :  10.1.19-MariaDB
--- Version de PHP :  7.0.13
+-- Généré le :  Jeu 12 Janvier 2017 à 19:15
+-- Version du serveur :  5.6.26
+-- Version de PHP :  5.6.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Structure de la table `diffuser`
 --
 
-CREATE TABLE `diffuser` (
+CREATE TABLE IF NOT EXISTS `diffuser` (
   `ID_DIFFUSION` bigint(4) NOT NULL,
   `ID_NEWS` bigint(4) NOT NULL,
   `ORDRE` int(2) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `diffuser` (
 -- Structure de la table `diffusion`
 --
 
-CREATE TABLE `diffusion` (
+CREATE TABLE IF NOT EXISTS `diffusion` (
   `ID` bigint(4) NOT NULL,
   `DERNIEREMODIFICATION` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -50,7 +50,7 @@ CREATE TABLE `diffusion` (
 -- Structure de la table `image`
 --
 
-CREATE TABLE `image` (
+CREATE TABLE IF NOT EXISTS `image` (
   `ID` bigint(4) NOT NULL,
   `CHEMIN` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -61,7 +61,7 @@ CREATE TABLE `image` (
 -- Structure de la table `news`
 --
 
-CREATE TABLE `news` (
+CREATE TABLE IF NOT EXISTS `news` (
   `ID` bigint(4) NOT NULL,
   `ID_UTILISATEUR` smallint(10) NOT NULL,
   `ID_IMAGE` bigint(4) NOT NULL,
@@ -82,24 +82,25 @@ CREATE TABLE `news` (
 -- Structure de la table `utilisateurs`
 --
 
-CREATE TABLE `utilisateurs` (
-  `ID` smallint(10) NOT NULL,
-  `NOM` char(255) NOT NULL,
-  `PRENOM` char(255) NOT NULL,
-  `EMAIL` varchar(255) NOT NULL,
-  `LOGIN` varchar(255) NOT NULL,
-  `MOTDEPASSE` varchar(255) NOT NULL,
-  `CREATION` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `CONNEXION` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `ADMIN` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `utilisateurs` (
+  `id` int(10) unsigned NOT NULL,
+  `nom` char(255) NOT NULL,
+  `prenom` char(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `login` varchar(255) NOT NULL,
+  `motdepasse` varchar(255) NOT NULL,
+  `creation` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `connexion` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `admin` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `utilisateurs`
 --
 
-INSERT INTO `utilisateurs` (`ID`, `NOM`, `PRENOM`, `EMAIL`, `LOGIN`, `MOTDEPASSE`, `CREATION`, `CONNEXION`, `ADMIN`) VALUES
-(2, 'wang', 'yuchen', '', 'test01', 'd2fd256077371f1d90f266d5a822db7d94cd037a8560c76b0a2afdc99a4c26a6', '2017-01-12 01:36:38', '0000-00-00 00:00:00', 1);
+INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `email`, `login`, `motdepasse`, `creation`, `connexion`, `admin`) VALUES
+(6, 'wang', 'yuchen', 'wangyc32@gmail.com', 'test01', '39dd1b0e4356a97f2fbdf14f7858dfd49b524ba4b4ba97bdc895496074800a6c', '2017-01-12 18:14:34', '0000-00-00 00:00:00', 0),
+(7, 'willian', 'ruchaud', 'ruchaud@3il.fr', 'test02', 'fb5380fc71a98ce78215db372b0b81595d770ad3900978cf3f933b4863d87496', '2017-01-12 18:15:11', '0000-00-00 00:00:00', 0);
 
 --
 -- Index pour les tables exportées
@@ -137,8 +138,17 @@ ALTER TABLE `news`
 -- Index pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`id`);
 
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `utilisateurs`
+--
+ALTER TABLE `utilisateurs`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- Contraintes pour les tables exportées
 --
@@ -154,8 +164,7 @@ ALTER TABLE `diffuser`
 -- Contraintes pour la table `news`
 --
 ALTER TABLE `news`
-  ADD CONSTRAINT `FK_NEWS_IMAGE` FOREIGN KEY (`ID_IMAGE`) REFERENCES `image` (`ID`),
-  ADD CONSTRAINT `FK_NEWS_UTILISATEURS` FOREIGN KEY (`ID_UTILISATEUR`) REFERENCES `utilisateurs` (`ID`);
+  ADD CONSTRAINT `FK_NEWS_IMAGE` FOREIGN KEY (`ID_IMAGE`) REFERENCES `image` (`ID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
