@@ -16,7 +16,7 @@ class IndexController extends \F3il\Controller{
 
     public function __construct($actionName = 'index')
     {
-        $this->redirectIfAuthenticated('?controller=suivi&action=lister');
+        $this->redirectIfAuthenticated('?controller=utilisateur');
         $this->setDefaultActionName($actionName);
     }
 

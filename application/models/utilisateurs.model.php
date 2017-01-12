@@ -68,7 +68,7 @@ class UtilisateursModel implements \F3il\AuthenticationInterface
     public function loginExistant($login, $id)
     {
         $db = \F3il\Database::getInstance();
-        if (0) {
+        if ($id!=0) {
             $sql = "SELECT COUNT(*) as numbre FROM `utilisateurs` WHERE login = :login"
                 . ", AND id <> :id";
             try {
