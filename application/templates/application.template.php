@@ -43,5 +43,5 @@ $user = $authentication->getLoggedUser();
     <?php NavigationHelper::render(); ?>
 </nav>
 <div class="container">
-    <div %VIEW%=""></div>
+    [%VIEW%]
 </div>
