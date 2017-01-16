@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 16 Janvier 2017 à 05:26
+-- Généré le :  Lun 16 Janvier 2017 à 14:25
 -- Version du serveur :  5.6.26
 -- Version de PHP :  5.6.12
 
@@ -27,20 +27,19 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `diffuser` (
-  `id_diffusion` bigint(4) NOT NULL,
-  `id_news` bigint(4) NOT NULL,
-  `ordre` int(2) NOT NULL,
-  `tempsdiffusion` int(3) NOT NULL
+  `ID_DIFFUSION` bigint(4) NOT NULL,
+  `ID_NEWS` bigint(4) NOT NULL,
+  `ORDRE` int(2) NOT NULL,
+  `TEMPSDIFFUSION` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `diffuser`
 --
 
-INSERT INTO `diffuser` (`id_diffusion`, `id_news`, `ordre`, `tempsdiffusion`) VALUES
-(1, 1, 1, 30),
-(1, 2, 3, 30),
-(1, 4, 2, 30);
+INSERT INTO `diffuser` (`ID_DIFFUSION`, `ID_NEWS`, `ORDRE`, `TEMPSDIFFUSION`) VALUES
+(1, 2, 1, 15),
+(1, 3, 2, 30);
 
 -- --------------------------------------------------------
 
@@ -49,16 +48,16 @@ INSERT INTO `diffuser` (`id_diffusion`, `id_news`, `ordre`, `tempsdiffusion`) VA
 --
 
 CREATE TABLE IF NOT EXISTS `diffusion` (
-  `id` bigint(4) NOT NULL,
-  `dernieremodification` datetime NOT NULL
+  `ID` bigint(4) NOT NULL,
+  `DERNIEREMODIFICATION` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `diffusion`
 --
 
-INSERT INTO `diffusion` (`id`, `dernieremodification`) VALUES
-(1, '2017-01-16 05:25:05');
+INSERT INTO `diffusion` (`ID`, `DERNIEREMODIFICATION`) VALUES
+(1, '2017-01-16 14:21:23');
 
 -- --------------------------------------------------------
 
@@ -67,15 +66,15 @@ INSERT INTO `diffusion` (`id`, `dernieremodification`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `image` (
-  `id` bigint(4) NOT NULL,
-  `chemin` text NOT NULL
+  `ID` bigint(4) NOT NULL,
+  `CHEMIN` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `image`
 --
 
-INSERT INTO `image` (`id`, `chemin`) VALUES
+INSERT INTO `image` (`ID`, `CHEMIN`) VALUES
 (1, 'images/images2017/1.jpg'),
 (2, 'images/images2017/2.jpg'),
 (3, 'images/images2017/3.jpg'),
@@ -88,25 +87,25 @@ INSERT INTO `image` (`id`, `chemin`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `news` (
-  `id` bigint(4) NOT NULL,
-  `id_utilisateur` smallint(10) NOT NULL,
-  `id_image` bigint(4) NOT NULL,
-  `titre` char(32) NOT NULL,
-  `texte` text NOT NULL,
-  `taillefont` int(3) NOT NULL,
-  `taillebande` int(3) NOT NULL,
-  `couleurfont` char(7) NOT NULL,
-  `couleurbandeau` char(12) NOT NULL,
-  `dateheuremodification` datetime NOT NULL,
-  `dateheurecreation` char(32) NOT NULL,
-  `positionbandeau` char(32) NOT NULL
+  `ID` bigint(4) NOT NULL,
+  `ID_UTILISATEUR` smallint(10) NOT NULL,
+  `ID_IMAGE` bigint(4) NOT NULL,
+  `TITRE` char(32) NOT NULL,
+  `TEXTE` text NOT NULL,
+  `TAILLEFONT` int(3) NOT NULL,
+  `TAILLEBANDE` int(3) NOT NULL,
+  `COULEURFONT` char(7) NOT NULL,
+  `COULEURBANDEAU` char(12) NOT NULL,
+  `DATEHEUREMODIFICATION` datetime NOT NULL,
+  `DATEHEURECREATION` char(32) NOT NULL,
+  `POSITIONBANDEAU` char(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `news`
 --
 
-INSERT INTO `news` (`id`, `id_utilisateur`, `id_image`, `titre`, `texte`, `taillefont`, `taillebande`, `couleurfont`, `couleurbandeau`, `dateheuremodification`, `dateheurecreation`, `positionbandeau`) VALUES
+INSERT INTO `news` (`ID`, `ID_UTILISATEUR`, `ID_IMAGE`, `TITRE`, `TEXTE`, `TAILLEFONT`, `TAILLEBANDE`, `COULEURFONT`, `COULEURBANDEAU`, `DATEHEUREMODIFICATION`, `DATEHEURECREATION`, `POSITIONBANDEAU`) VALUES
 (1, 6, 1, 'Aircafte carrier', 'Aircafte carrier text', 10, 10, 'gris', 'gris', '2017-01-01 00:00:00', '2017-01-01 00:00:00', 'top'),
 (2, 7, 2, 'test02', 'test02 texte', 10, 10, 'gris', 'gris', '2017-01-01 00:00:00', '2017-01-01 00:00:00', 'left'),
 (3, 7, 4, 'paris', 'paris texte', 10, 10, 'gris', 'gris', '2017-01-26 00:00:00', '2017-01-26 00:00:00', 'left'),
@@ -128,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `creation` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `connexion` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `admin` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `utilisateurs`
@@ -146,29 +145,29 @@ INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `email`, `login`, `motdepasse
 -- Index pour la table `diffuser`
 --
 ALTER TABLE `diffuser`
-  ADD PRIMARY KEY (`id_diffusion`,`id_news`),
-  ADD KEY `I_FK_DIFFUSER_DIFFUSION` (`id_diffusion`),
-  ADD KEY `I_FK_DIFFUSER_NEWS` (`id_news`);
+  ADD PRIMARY KEY (`ID_DIFFUSION`,`ID_NEWS`),
+  ADD KEY `I_FK_DIFFUSER_DIFFUSION` (`ID_DIFFUSION`),
+  ADD KEY `I_FK_DIFFUSER_NEWS` (`ID_NEWS`);
 
 --
 -- Index pour la table `diffusion`
 --
 ALTER TABLE `diffusion`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Index pour la table `image`
 --
 ALTER TABLE `image`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Index pour la table `news`
 --
 ALTER TABLE `news`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `I_FK_NEWS_UTILISATEURS` (`id_utilisateur`),
-  ADD KEY `I_FK_NEWS_IMAGE` (`id_image`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `I_FK_NEWS_UTILISATEURS` (`ID_UTILISATEUR`),
+  ADD KEY `I_FK_NEWS_IMAGE` (`ID_IMAGE`);
 
 --
 -- Index pour la table `utilisateurs`
@@ -184,7 +183,7 @@ ALTER TABLE `utilisateurs`
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- Contraintes pour les tables exportées
 --
@@ -193,8 +192,8 @@ ALTER TABLE `utilisateurs`
 -- Contraintes pour la table `diffuser`
 --
 ALTER TABLE `diffuser`
-  ADD CONSTRAINT `FK_DIFFUSER_DIFFUSION` FOREIGN KEY (`id_diffusion`) REFERENCES `diffusion` (`id`),
-  ADD CONSTRAINT `FK_DIFFUSER_NEWS` FOREIGN KEY (`id_news`) REFERENCES `news` (`id`);
+  ADD CONSTRAINT `FK_DIFFUSER_DIFFUSION` FOREIGN KEY (`ID_DIFFUSION`) REFERENCES `diffusion` (`ID`),
+  ADD CONSTRAINT `FK_DIFFUSER_NEWS` FOREIGN KEY (`ID_NEWS`) REFERENCES `news` (`ID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
