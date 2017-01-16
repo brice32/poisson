@@ -17,11 +17,11 @@ $this->setPageTitle('Utilisateur');
     <?php
     $this->formulaire->render();
     ?>
-    <pre><?php
-//        print_r($this->formData);
-        print_r($this->formulaire);
-        print_r($_POST);
-//        print_r($this->b);
-//        echo $this->b;
-        ?></pre>
+<!--    <pre>--><?php
+////        print_r($this->formData);
+//        print_r($this->formulaire);
+//        print_r($_POST);
+////        print_r($this->b);
+////        echo $this->b;
+//        ?><!--</pre>-->
 </div>

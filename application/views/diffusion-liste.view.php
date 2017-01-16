@@ -98,6 +98,7 @@ else{
 //        alert(document.getElementById('select-ordre').action)
         document.getElementById('select-ordre').submit();
     };
+
 //    $(document).ready(function() {
 //        $('#ordre').val("<?php //echo $ordre_value?>//");
 //    };

@@ -15,7 +15,7 @@ abstract class DiffHelper
         ?>
         <tr>
             <td>
-                <div style="height: 158px; ">
+                <div  style="height: 158px; ">
                     <div style="background-image: url(<?php echo $news['chemin'] ?>);background-size: cover;height: 108px;width: 192px;float: left;"></div>
                     <div style="float:right;height: 108px; width: 35%;overflow: hidden;margin: 0 auto;">
                         <p>Par:<?php echo strtoupper($news['nom']) ?></p>
