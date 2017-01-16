@@ -24,6 +24,7 @@ $this->setPageTitle('Utilisateur-Liste');
         <th>Prénom</th>
         <th>Email</th>
         <th>Login</th>
+        <th>Admin</th>
         <th>Création</th>
         <th>Connextion</th>
         <th>Id</th>
@@ -40,6 +41,7 @@ $this->setPageTitle('Utilisateur-Liste');
         <td><?php echo $U['prenom'];?></td>
         <td><?php echo $U['email'];?></td>
         <td><?php echo $U['login'];?></td>
+        <td><?php echo $U['admin'];?></td>
         <td><?php echo $U['creation'];?></td>
         <td><?php echo $U['connexion'];?></td>
         <td><?php echo $U['id'];?></td>

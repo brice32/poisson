@@ -75,8 +75,6 @@ class UtilisateurForm extends Form
         if(array_key_exists("id",$_POST)){
             $id=$_POST["id"];
         }
-//
-
         if ($mode->loginExistant($login,$id)) {
             if (!strpos($login, " ")) {
                 if (strlen($login) >= 6) {
