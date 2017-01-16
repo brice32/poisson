@@ -57,4 +57,19 @@ class DiffusionController extends \F3il\Controller
         HttpHelper::redirect('?controller=diffusion');
     }
 
+    public function modifiertempsAction(){
+        $ordre=$_GET['ordre'];
+        $temps=$_GET['temps'];
+        switch($temps){
+            case 15:$temps=30;break;
+            case 30:$temps=60;break;
+            case 60:$temps=90;break;
+            case 90:$temps=15;break;
+            default:$temps=30;
+        }
+
+        $mode_diffusion= new DiffusionModel();
+        $mode_diffusion->modifiertemps($ordre,$temps);
+        HttpHelper::redirect('?controller=diffusion');
+    }
 }

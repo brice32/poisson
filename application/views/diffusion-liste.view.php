@@ -8,7 +8,7 @@
 namespace Poisson;
 defined('Poisson') or die('Acces interdit');
 //$this->addStyleSheet();
-$this->setPageTitle('Diffusion-Liste');
+$this->setPageTitle('Diffusion');
 $mode_diff=new DiffusionModel();
 if(isset($_SESSION['ordre'])){
     $ordre_value=$_SESSION['ordre'];

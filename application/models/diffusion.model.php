@@ -13,8 +13,9 @@ class DiffusionModel{
     public function lister(){
 
         $db = \F3il\Database::getInstance();
-        $sql = "SELECT diffuser.*,image.chemin,utilisateurs.nom,news.dateheurecreation,news.id,news.titre FROM `news` LEFT JOIN `utilisateurs` ON news.id_utilisateur = utilisateurs.id LEFT JOIN `image` ON news.id_image = image.id INNER JOIN `diffuser` ON diffuser.id_news = news.id"
-                ." WHERE diffuser.id_diffusion=1"
+        $sql = "SELECT diffuser.ID_NEWS as id_news,diffuser.ORDRE as ordre,diffuser.TEMPSDIFFUSION as tempsdiffusion,image.CHEMIN as chemin,utilisateurs.nom,news.DATEHEURECREATION as dateheurecreation,news.ID as id,news.TITRE as titre FROM `news` LEFT JOIN `utilisateurs` ON news.ID_UTILISATEUR = utilisateurs.id LEFT JOIN `image` ON news.ID_IMAGE = image.ID INNER JOIN `diffuser` ON diffuser.ID_NEWS = news.ID"
+                ." WHERE diffuser.ID_DIFFUSION=1"
+                ." ORDER BY diffuser.ORDRE"
                 ;
         try {
             $req = $db->prepare($sql);
@@ -28,10 +29,10 @@ class DiffusionModel{
     public function ajouter($id,$order){
         $db = \F3il\Database::getInstance();
         $sql = "INSERT INTO diffuser SET "
-                . " id_diffusion = 1"
-                . ", id_news = :id_news"
-                . ", ordre = :ordre"
-                . ",tempsdiffusion = 30";
+                . " ID_DIFFUSION = 1"
+                . ", ID_NEWS = :id_news"
+                . ", ORDRE = :ordre"
+                . ",TEMPSDIFFUSION = 30";
 
 
         try {
@@ -47,7 +48,7 @@ class DiffusionModel{
 
     public function ordremaxi(){
         $db = \F3il\Database::getInstance();
-        $sql = "SELECT MAX(diffuser.ordre) as maxi FROM `diffuser` WHERE diffuser.id_diffusion=1";
+        $sql = "SELECT MAX(diffuser.ORDRE) as maxi FROM `diffuser` WHERE diffuser.ID_DIFFUSION=1";
         try {
             $req = $db->prepare($sql);
             $req->execute();
@@ -61,7 +62,7 @@ class DiffusionModel{
 
     public function newsetat($id){
         $db = \F3il\Database::getInstance();
-        $sql = "SELECT COUNT(*) as nombre FROM `diffuser` WHERE diffuser.id_news=:id_news AND diffuser.id_diffusion=1";
+        $sql = "SELECT COUNT(*) as nombre FROM `diffuser` WHERE diffuser.ID_NEWS=:id_news AND diffuser.ID_DIFFUSION=1";
         try {
             $req = $db->prepare($sql);
             $req->bindValue(':id_news', $id);
@@ -81,7 +82,7 @@ class DiffusionModel{
     public function supprimerorder($ordre){
 
         $db = \F3il\Database::getInstance();
-        $sql = "DELETE FROM `diffuser` WHERE `ordre`=:ordre AND diffuser.id_diffusion=1";
+        $sql = "DELETE FROM `diffuser` WHERE `ORDRE`=:ordre AND diffuser.ID_DIFFUSION=1";
         try {
             $req = $db->prepare($sql);
             $req->bindValue(':ordre', $ordre);
@@ -90,7 +91,7 @@ class DiffusionModel{
             die('Erreur SQL ' . $ex->getMessage());
         }
 
-        $sql = "UPDATE `diffuser` SET `ordre`=`ordre`-1 WHERE `ordre`>:ordre AND diffuser.id_diffusion=1";
+        $sql = "UPDATE `diffuser` SET `ORDRE`=`ORDRE`-1 WHERE `ORDRE`>:ordre AND diffuser.ID_DIFFUSION=1";
         try {
             $req = $db->prepare($sql);
             $req->bindValue(':ordre', $ordre);
@@ -103,7 +104,7 @@ class DiffusionModel{
 
     public function update(){
         $db = \F3il\Database::getInstance();
-        $sql = "UPDATE `diffusion` SET `dernieremodification` = :modification";
+        $sql = "UPDATE `diffusion` SET `DERNIEREMODIFICATION` = :modification";
         try {
             $req = $db->prepare($sql);
             $modification=date('Y-m-d H:i:s');
@@ -116,7 +117,7 @@ class DiffusionModel{
 
     public function update_modification(){
         $db = \F3il\Database::getInstance();
-        $sql = "SELECT diffusion.dernieremodification FROM `diffusion`";
+        $sql = "SELECT diffusion.DERNIEREMODIFICATION FROM `diffusion`";
         try {
             $req = $db->prepare($sql);
             $req->execute();
@@ -124,7 +125,7 @@ class DiffusionModel{
             die('Erreur SQL ' . $ex->getMessage());
         }
         $modification=$req->fetch(\PDO::FETCH_ASSOC);
-        return $modification['dernieremodification'];
+        return $modification['DERNIEREMODIFICATION'];
     }
 
     public function touteffacer(){
@@ -136,6 +137,21 @@ class DiffusionModel{
         } catch (\PDOException $ex) {
             die('Erreur SQL ' . $ex->getMessage());
         }
+    }
+
+    public function modifiertemps($ordre,$temps){
+        $db = \F3il\Database::getInstance();
+        $sql = "UPDATE `diffuser` SET `TEMPSDIFFUSION` = :temps"
+                . " WHERE `ORDRE`=:ordre";
+        try {
+            $req = $db->prepare($sql);
+            $req->bindValue(':temps',$temps);
+            $req->bindValue(':ordre',$ordre);
+            $req->execute();
+        } catch (\PDOException $ex) {
+            die('Erreur SQL ' . $ex->getMessage());
+        }
+        $this->update();
     }
 
 

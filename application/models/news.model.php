@@ -13,7 +13,7 @@ class NewsModel
 
     public function lister()
     {
-        $ordres=array("news.dateheurecreation DESC","news.dateheurecreation","utilisateurs.nom DESC","utilisateurs.nom");
+        $ordres=array("news.DATEHEURECREATION DESC","news.DATEHEURECREATION","utilisateurs.nom DESC","utilisateurs.nom");
         if(isset($_SESSION['ordre'])){
             $key=$_SESSION['ordre']-1;
         }
@@ -23,7 +23,7 @@ class NewsModel
         $ordre=$ordres[$key];
         $db = \F3il\Database::getInstance();
 
-        $sql = "SELECT image.chemin,utilisateurs.nom,news.dateheurecreation,news.id,news.titre FROM `news` LEFT JOIN `utilisateurs` ON news.id_utilisateur = utilisateurs.id LEFT JOIN `image` ON news.id_image = image.id"
+        $sql = "SELECT image.CHEMIN as chemin,utilisateurs.nom,news.DATEHEURECREATION as dateheurecreation,news.ID as id,news.TITRE as titre FROM `news` LEFT JOIN `utilisateurs` ON news.ID_UTILISATEUR = utilisateurs.id LEFT JOIN `image` ON news.ID_IMAGE = image.ID"
                 ." ORDER BY $ordre";
         try {
             $req = $db->prepare($sql);

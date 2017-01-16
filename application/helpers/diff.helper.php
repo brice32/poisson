@@ -66,10 +66,10 @@ abstract class DiffHelper
                 </div>
             </div>
         </td>
-                <td>30s</td>
+                <td><?php echo $diffusion['tempsdiffusion']?>s</td>
                 <!-- onclick : fait apparaître une fenêtre pour changer durée de diffusion-->
                 <td>
-                    <span ><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                    <a href="?controller=diffusion&action=modifiertemps&ordre=<?php echo $diffusion['ordre']?>&temps=<?php echo $diffusion['tempsdiffusion']?>"><span ><i class="fa fa-clock-o" aria-hidden="true"></i></span></a>
                 </td>
                 <td>
                     <a href="?controller=diffusion&action=supprimer&ordre=<?php echo $diffusion['ordre']?>"><span><i class="fa fa-ban" aria-hidden="true"></i></span></a>
