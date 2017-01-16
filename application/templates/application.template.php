@@ -31,7 +31,7 @@ $user = $authentication->getLoggedUser();
     <h2><span>3</span>I NEWS</h2>
     <div class="nomPage"><?php echo $this->getPageTitle();?></div>
     <div class="utilisateur">
-        <?php echo strtoupper($user['nom']) . "." . ucfirst($user['prenom']); ?>
+        <?php echo strtoupper($user['nom']) . " " . ucfirst($user['prenom']); ?>
         <a href="?controller=utilisateur&action=deconnecter">
             <span id="logout">
                 <i class="fa fa-power-off" aria-hidden="true"></i>
